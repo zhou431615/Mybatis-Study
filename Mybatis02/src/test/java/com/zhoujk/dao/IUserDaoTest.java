@@ -10,11 +10,13 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 /**
  * Created by IntelliJ IDEA
  *
  * @Author: ZhouJiankang
- * @Date: 2021/9/24  14:50
+ * @Date: 2021/9/24  21:28
  * @Description:
  */
 
@@ -40,7 +42,8 @@ public class IUserDaoTest
     }
 
 
-    @Test    public void selectUserById()
+    @Test
+    public void selectUserById()
     {
     }
 

@@ -4,8 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!--configuration核心配置文件-->
 <configuration>
-    <!--加载类路径下的属性文件-->
+    <!--1.properties属性引入外部配置文件-->
     <properties resource="db.properties"/>
+    <!--2.全局配置参数 -->
+    <settings>
+        <!--开启驼峰匹配-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--3.别名设置-->
+    <typeAliases>
+        <!--<typeAlias type="com.zhoujk.pojo.UserPOJO" alias="UserPOJO"/>-->
+        <!--<typeAlias type="com.zhoujk.vo.UserVO"  alias="UserVO"/>-->
+        <package name="com.zhoujk.pojo"/>
+        <package name="com.zhoujk.vo"/>
+    </typeAliases>
     <!-- 设置一个默认的连接环境信息-->
     <environments default="Mysql8.0_development">
         <!-- 连接环境信息  取一个任意的唯一名字-->
@@ -16,7 +28,7 @@
             <dataSource type="POOLED">
                 <!--配置与数据库交互的4必要属性-->
                 <property name="driver" value="${mysql.driver}"/>
-                <property name="url"  value="${mysql.url}"/>
+                <property name="url" value="${mysql.url}"/>
                 <property name="username" value="${mysql.username}"/>
                 <property name="password" value="${mysql.password}"/>
             </dataSource>
@@ -30,7 +42,7 @@
             <dataSource type="POOLED">
                 <!--配置与数据库交互的4必要属性-->
                 <property name="driver" value="${oracle.driver}"/>
-                <property name="url"  value="${oracle.url}"/>
+                <property name="url" value="${oracle.url}"/>
                 <property name="username" value="${oracle.username}"/>
                 <property name="password" value="${oracle.password}"/>
             </dataSource>

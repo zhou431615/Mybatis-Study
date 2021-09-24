@@ -1,13 +1,9 @@
 package com.zhoujk.test;
 
 import com.zhoujk.dao.IUserDao;
-import com.zhoujk.dao.UserDao;
 import com.zhoujk.pojo.UserPOJO;
 import com.zhoujk.utils.MybatisDBUtil;
-import com.zhoujk.vo.UserVO;
 import org.apache.ibatis.session.SqlSession;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA
@@ -24,13 +20,13 @@ public class MyBatisTest03_Mapper
         SqlSession sqlSession = MybatisDBUtil.getSqlSession();
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         //查询用户信息
-        UserVO userVO = userDao.selectUserById(5);
-        System.out.println(userVO);
-/*        //更新用户信息
-        UserPOJO userPOJO1 = new UserPOJO(6, "赵六", "123456", 20, "女", "Sing，Rap", "singer");
+/*        UserVO userVO = userDao.selectUserById(5);
+        System.out.println(userVO);*/
+       //更新用户信息
+        UserPOJO userPOJO1 = new UserPOJO(7, "赵六", "123456", 20, "女", "Sing，Rap", "多情却被无情恼");
         boolean flag1 = userDao.updateById(userPOJO1);
         System.out.println(flag1);
-        //插入用户信息
+/*        //插入用户信息
         UserPOJO userPOJO2 = new UserPOJO("王五", "123456", 20, "女", "Sing", "singer");
         boolean flag2 = userDao.insert(userPOJO2);
         sqlSession.commit();
@@ -43,7 +39,6 @@ public class MyBatisTest03_Mapper
         List<UserVO> userVOList = userDao.selectAll();
         for (UserVO vo : userVOList) {
             System.out.println(vo);
-        }
-    */
+        }*/
     }
 }
