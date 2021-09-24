@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujk.dao.IUserDao">
+    <!--id statementId值  resultType返回值类型:VO的全路径名称-->
+    <select id="selectUserById" resultType="com.zhoujk.vo.UserVO" parameterType="int">
+        select *
+        from user
+        where id = #{id}
+    </select>
+    <select id="selectAll" resultType="com.zhoujk.vo.UserVO">
+        select *
+        from user
+    </select>
+    <insert id="insert" parameterType="com.zhoujk.pojo.UserPOJO">
+        insert into user(username, password, age, sex, hobby, remark)
+        values (#{username}, #{password}, #{age}, #{sex}, #{hobby}, #{remark})
+    </insert>
+    <update id="updateById" parameterType="com.zhoujk.pojo.UserPOJO">
+        update user
+        set username=#{username},
+            password=#{password},
+            age=#{age},
+            sex=#{sex},
+            hobby=#{hobby},
+            remark=#{remark}
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+        delete
+        from user
+        where id = #{id}
+
+    </delete>
+</mapper>
