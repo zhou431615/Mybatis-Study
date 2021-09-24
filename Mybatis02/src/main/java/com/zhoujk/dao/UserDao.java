@@ -14,7 +14,7 @@ import java.util.List;
  * @Date: 2021/9/23  13:57
  * @Description:
  */
-public class UserDao implements IUserDao
+public class UserDao implements UserMapper
 {
 /**
  * 这里的test的命名空间已舍弃，使用Mapper动态代理接口，直接省掉Dao实现类 */

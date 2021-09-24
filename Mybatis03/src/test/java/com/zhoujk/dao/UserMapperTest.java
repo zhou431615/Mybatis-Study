@@ -10,27 +10,24 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 /**
  * Created by IntelliJ IDEA
  *
  * @Author: ZhouJiankang
- * @Date: 2021/9/24  21:28
+ * @Date: 2021/9/24  22:30
  * @Description:
  */
-
-/**
- * 这几天做Junit测试接触到了setup和teardown两个方法，
- * 简单的可以这样理解它们，setup主要实现测试前的初始化工作，
- * 而teardown则主要实现测试完成后的垃圾回收等工作。
- */
-public class IUserDaoTest
+public class UserMapperTest
 {
     SqlSession sqlSession;
+    UserMapper userMapper;
     @Before
     public void setUp() throws Exception
     {
         sqlSession = MybatisDBUtil.getSqlSession();
-
+        userMapper = sqlSession.getMapper(UserMapper.class);
     }
 
     @After
@@ -39,37 +36,42 @@ public class IUserDaoTest
         sqlSession.commit();
     }
 
-
     @Test
     public void selectUserById()
     {
+        UserVO userVO = userMapper.selectUserById(1);
+        System.out.println(userVO);
     }
 
     @Test
     public void selectAll()
     {
-        UserMapper userDao = sqlSession.getMapper(UserMapper.class);
-        List<UserVO> userVOList = userDao.selectAll();
+        List<UserVO> userVOList = userMapper.selectAll();
         for (UserVO vo : userVOList) {
             System.out.println(vo);
         }
     }
+
     @Test
     public void insert()
     {
+        UserPOJO userPOJO = new UserPOJO("程韩一", "123456", 23, "女", "绘画", "艺术家");
+        boolean flag = userMapper.insert(userPOJO);
+        System.out.println(flag);
     }
 
     @Test
     public void updateById()
     {
-        UserMapper userDao = sqlSession.getMapper(UserMapper.class);
         UserPOJO userPOJO1 = new UserPOJO(9, "刘一凡", "123456", 20, "女", "Sing，Rap", "看书");
-        boolean flag1 = userDao.updateById(userPOJO1);
-        System.out.println(flag1);
+        boolean flag = userMapper.updateById(userPOJO1);
+        System.out.println(flag);
     }
 
     @Test
     public void deleteById()
     {
+        boolean flag = userMapper.deleteById(10);
+        System.out.println(flag);
     }
 }

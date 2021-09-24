@@ -28,7 +28,7 @@ import java.util.List;
  * @author ZhouJiankang*/
 
 
-public interface IUserDao
+public interface UserMapper
 {
     /**
      * 根据用户ID查询该用户信息
