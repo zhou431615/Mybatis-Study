@@ -3,6 +3,7 @@
         "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhoujk.dao.UserMapper">
+
     <!--id statementId值  resultType返回值类型:UserVO-->
     <select id="selectUserById" resultType="UserVO" parameterType="int">
         /*在这里使用了SQL片段*/
@@ -41,8 +42,6 @@
         <result column="user_hobby" property="userHobby"/>
         <result column="user_remark" property="remark"/>
     </resultMap>
-
-
     <!--    <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="string">
             select
             <include refid="sqlCommon.sqlColumnComm"></include>
@@ -51,52 +50,93 @@
             username like "%"#{param2}"%"
         </select>-->
     <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="String">
-        select *
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
         from user1
         where usersex = #{sex}
         <if test="username!=null and username.trim()!=null">
             and username like "%"#{username}"%"
         </if>
-        <if test="age!=0 and age.trim()!=0">
+        <if test="age!=0">
             and userage=#{age}
         </if>
     </select>
 
 
-    <select id="selectUserListByNameLike" resultMap="UserVO1ResultMap" parameterType="string">
+    <select id="selectUserListByNameLike" resultMap="UserVO1ResultMap">
         select *
         from user1
-        where username like "%"#{userName}"%"
+        where username like "%"#{username}"%"
     </select>
 
 
-    <select id="selectAll" resultType="UserVO">
+    <!--按照姓名和年龄查询，如果没有填入信息，就直接按照张三查询-->
+    <select id="selectUserListByNameAndAge" resultMap="UserVO1ResultMap">
+        select *
+        from user1
+        where usersex = '男'
+        <choose>
+            <when test="username!=null and username.trim()!=''">
+                and username=#{username}
+            </when>
+            <when test="age!=null">
+                and userage=#{age}
+            </when>
+            <otherwise>
+                and username='张三'
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <!--selectUserListByNameAndAgeWhere1-->
+    <!-- where拼接原理:
+       where 元素只会在子元素返回任何内容的情况下才插入 “WHERE” 子句。
+       而且，若子句的开头为 “AND” 或 “OR”，where 元素也会将它们去除。
+       -->
+    <select id="selectUserListByNameAndAgeWhere1" resultMap="UserVO1ResultMap">
         select
         <include refid="sqlCommon.sqlColumnComm"></include>
-        from user
+        from user1
+        <where>
+            <choose>
+                <when test="username!=null and username.trim()!=''">
+                    and username=#{username}
+                </when>
+                <when test="age!=null">
+                    and userage=#{age}
+                </when>
+                <otherwise>
+                    and username='张三'
+                </otherwise>
+            </choose>
+        </where>
     </select>
-    <insert id="insert" parameterType="UserPOJO">
-        insert into user(username, password, age, sex, user_hobby, remark)
-        values (#{username}, #{password}, #{age}, #{sex}, #{userHobby}, #{remark})
-    </insert>
-    <insert id="insertBy$" parameterType="UserPOJO">
-        insert into user(username, password, age, sex, user_hobby, remark)
-        values ('${username}', '${password}', '${age}', '${sex}', '${userHobby}', '${remark}')
-    </insert>
 
-    <update id="updateById" parameterType="com.zhoujk.pojo.UserPOJO">
-        update user
-        set username=#{username},
-            password=#{password},
-            age=#{age},
-            sex=#{sex},
-            user_hobby=#{userHobby},
-            remark=#{remark}
-        where id = #{id}
-    </update>
-    <delete id="deleteById" parameterType="int">
-        delete
-        from user
-        where id = #{id}
-    </delete>
+    <select id="selectUserListByNameAndAgeWhere2" resultMap="UserVO1ResultMap">
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
+        from user1
+        <where>
+            <!--<choose>
+                <when test="username!=null and username.trim()!=''">
+                    and username=#{username}
+                </when>
+                <when test="age!=0">
+                    and userage=#{age}
+                </when>
+                <otherwise>
+                    and username='张三'
+                </otherwise>
+            </choose>-->
+            <if test="username!=null and username.trim()!=''">
+                and username=#{username}
+            </if>
+            <if test="age!=null">
+                and  userage=#{age}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by IntelliJ IDEA
  *
@@ -23,6 +21,7 @@ public class UserMapperTest
 {
     SqlSession sqlSession;
     UserMapper userMapper;
+
     @Before
     public void setUp() throws Exception
     {
@@ -41,38 +40,6 @@ public class UserMapperTest
     {
         UserVO userVO = userMapper.selectUserById(1);
         System.out.println(userVO);
-    }
-
-    @Test
-    public void selectAll()
-    {
-        List<UserVO> userVOList = userMapper.selectAll();
-        for (UserVO vo : userVOList) {
-            System.out.println(vo);
-        }
-    }
-
-    @Test
-    public void insert()
-    {
-        UserPOJO userPOJO = new UserPOJO("程韩一", "123456", 23, "女", "绘画", "艺术家");
-        boolean flag = userMapper.insert(userPOJO);
-        System.out.println(flag);
-    }
-
-    @Test
-    public void updateById()
-    {
-        UserPOJO userPOJO1 = new UserPOJO(9, "刘一凡", "123456", 20, "女", "Sing，Rap", "看书");
-        boolean flag = userMapper.updateById(userPOJO1);
-        System.out.println(flag);
-    }
-
-    @Test
-    public void deleteById()
-    {
-        boolean flag = userMapper.deleteById(10);
-        System.out.println(flag);
     }
 
     @Test
@@ -97,10 +64,40 @@ public class UserMapperTest
     @Test
     public void selectUserListBySexAndNameLike()
     {
-        List<UserVO>  userVOList = userMapper.selectUserListBySexAndNameLike("男", "三","23");
+        List<UserVO> userVOList = userMapper.selectUserListBySexAndNameLike("男", "三", 23);
         for (UserVO vo : userVOList) {
             System.out.println(vo);
         }
+    }
+
+    @Test
+    public void selectUserListByNameAndAge()
+    {
+        List<UserVO> userVOList = userMapper.selectUserListByNameAndAge(null, null);
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+        System.out.println("有结果");
+    }
+
+    @Test
+    public void selectUserListByNameAndAgeWhere1()
+    {
+        List<UserVO> userVOList = userMapper.selectUserListByNameAndAgeWhere1(null, null);
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+        System.out.println("有结果");
+    }
+
+    @Test
+    public void selectUserListByNameAndAgeWhere2()
+    {
+        List<UserVO> userVOList = userMapper.selectUserListByNameAndAgeWhere2("张三", 23);
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+        System.out.println("看看结果与selectUserListByNameAndAgeWhere1的有什么不同！");
     }
 
 }

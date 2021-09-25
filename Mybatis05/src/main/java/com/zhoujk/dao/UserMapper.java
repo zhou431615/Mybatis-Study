@@ -30,7 +30,6 @@ import java.util.List;
  */
 
 
-
 public interface UserMapper
 {
     /**
@@ -40,40 +39,6 @@ public interface UserMapper
      * @return UserVO 用户对象
      */
     UserVO selectUserById(Integer id);
-
-    /**
-     * 查询所有的用户信息
-     *
-     * @return UserVO list
-     */
-    List<UserVO> selectAll();
-
-    /**
-     * 插入用户信息
-     * Insert boolean.
-     *
-     * @param userPOJO the user pojo
-     * @return the boolean
-     */
-    boolean insert(UserPOJO userPOJO);
-
-    /**
-     * 更新用户信息
-     * Update by id boolean.
-     *
-     * @param userPOJO the user pojo
-     * @return the boolean
-     */
-    boolean updateById(UserPOJO userPOJO);
-
-    /**
-     * 删除用户信息
-     * Delete by id boolean.
-     *
-     * @param id the id
-     * @return the boolean
-     */
-    boolean deleteById(Integer id);
 
     /**
      * 按照用户名称 模糊查询 包含某个字符串的用户信息
@@ -100,12 +65,50 @@ public interface UserMapper
      * 按照用户名称和性别 模糊查询 包含某个字符串的用户信息
      * mybatis中 如果含有多个参数列表  建议使用对象传值
      *
-     * @param userName 用户名称
-     * @param  sex  性别
-     * @param  age  年龄
+     * 使用Mybatis的动态SQL的if
+     * @param username 用户名称
+     * @param sex      性别
+     * @param age      年龄
      * @return 用户信息列表
      */
-    List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("username") String userName,@Param("age") String age);
+    List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("username") String username, @Param("age") int age);
+
+
+    /**
+     * 查询男性用户，如果输入了姓名则按照姓名模糊查找，
+     * 否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
+     *
+     * @param username 用户名称
+     * @param age      年龄
+     * @return 用户信息列表
+     */
+
+    List<UserVO> selectUserListByNameAndAge(@Param("username") String username, @Param("age") Integer age);
+
+
+    /**
+     *  询男性用户，如果输入了姓名则按照姓名模糊查找，
+     *  否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
+     *  使用动态SQL的where
+     *
+     * @param username  用户名称
+     * @param age   年龄
+     * @return  用户信息列表
+     */
+
+    List<UserVO> selectUserListByNameAndAgeWhere1(@Param("username") String username, @Param("age") Integer age);
+
+   /**
+     *  询男性用户，如果输入了姓名则按照姓名模糊查找，
+     *  否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
+     *  使用动态SQL的where
+     *
+     * @param username  用户名称
+     * @param age   年龄
+     * @return  用户信息列表
+     */
+
+    List<UserVO> selectUserListByNameAndAgeWhere2(@Param("username") String username, @Param("age") Integer age);
 
 
 }
