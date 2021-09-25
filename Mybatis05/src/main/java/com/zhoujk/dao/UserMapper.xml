@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujk.dao.UserMapper">
+    <!--id statementId值  resultType返回值类型:UserVO-->
+    <select id="selectUserById" resultType="UserVO" parameterType="int">
+        /*在这里使用了SQL片段*/
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
+        from user
+        where id = #{id}
+    </select>
+
+
+    <!--按照用户名称 模糊查询用户信息
+    <select id="selectUserListByNameLike" resultType="UserVO" parameterType="String">
+            select *
+            from user
+                /* # 防止sql注入写法*/
+            where username like "%"#{userName}"%"
+            /* $  字符串拼接写法
+            where  username like '%${value}%'
+               */
+        </select>-->
+
+
+    <!--resultMap用于解决 数据库表的列名 和Java类的属性不一致的问题
+       resultMap  会自动把查询结果的列名与Java类型中的属性进行匹配
+        匹配成功，就把值封装到对象
+        匹配不成功， 就是Null或者0 如何去解决问题
+        会对result或者id 进行一一对应 主键使用id标签 其他内容都是result-->
+    <resultMap id="UserVO1ResultMap" type="UserVO">
+        <!--主键对应-->
+        <id column="userid" property="id"/>
+        <!--非主键对应-->
+        <result column="username" property="username"/>
+        <result column="userpassword" property="password"/>
+        <result column="userage" property="age"/>
+        <result column="usersex" property="sex"/>
+        <result column="user_hobby" property="userHobby"/>
+        <result column="user_remark" property="remark"/>
+    </resultMap>
+
+
+    <!--    <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="string">
+            select
+            <include refid="sqlCommon.sqlColumnComm"></include>
+            from user1
+            where usersex=#{param1} and
+            username like "%"#{param2}"%"
+        </select>-->
+    <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="String">
+        select *
+        from user1
+        where usersex = #{sex}
+        <if test="username!=null and username.trim()!=null">
+            and username like "%"#{username}"%"
+        </if>
+        <if test="age!=0 and age.trim()!=0">
+            and userage=#{age}
+        </if>
+    </select>
+
+
+    <select id="selectUserListByNameLike" resultMap="UserVO1ResultMap" parameterType="string">
+        select *
+        from user1
+        where username like "%"#{userName}"%"
+    </select>
+
+
+    <select id="selectAll" resultType="UserVO">
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
+        from user
+    </select>
+    <insert id="insert" parameterType="UserPOJO">
+        insert into user(username, password, age, sex, user_hobby, remark)
+        values (#{username}, #{password}, #{age}, #{sex}, #{userHobby}, #{remark})
+    </insert>
+    <insert id="insertBy$" parameterType="UserPOJO">
+        insert into user(username, password, age, sex, user_hobby, remark)
+        values ('${username}', '${password}', '${age}', '${sex}', '${userHobby}', '${remark}')
+    </insert>
+
+    <update id="updateById" parameterType="com.zhoujk.pojo.UserPOJO">
+        update user
+        set username=#{username},
+            password=#{password},
+            age=#{age},
+            sex=#{sex},
+            user_hobby=#{userHobby},
+            remark=#{remark}
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+</mapper>
