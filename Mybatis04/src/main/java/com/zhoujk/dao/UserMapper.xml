@@ -54,7 +54,12 @@
         select *
         from user1
         where usersex = #{sex}
-          and username like "%"#{userName}"%"
+        <if test="username!=null and username.trim()!=null">
+            and username like "%"#{username}"%"
+        </if>
+        <if test="age!=0 and age.trim()!=0">
+            and userage=#{age}
+        </if>
     </select>
 
 

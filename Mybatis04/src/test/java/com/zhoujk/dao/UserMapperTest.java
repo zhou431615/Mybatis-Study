@@ -97,7 +97,7 @@ public class UserMapperTest
     @Test
     public void selectUserListBySexAndNameLike()
     {
-        List<UserVO>  userVOList = userMapper.selectUserListBySexAndNameLike("男", "三");
+        List<UserVO>  userVOList = userMapper.selectUserListBySexAndNameLike("男", "三","23");
         for (UserVO vo : userVOList) {
             System.out.println(vo);
         }

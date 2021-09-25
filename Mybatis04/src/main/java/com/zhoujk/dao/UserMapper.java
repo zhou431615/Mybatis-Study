@@ -104,7 +104,7 @@ public interface UserMapper
      */
 
 
-    List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("userName") String userName);
+    List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("username") String userName,@Param("age") String age);
 
 
 }
