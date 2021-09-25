@@ -30,6 +30,7 @@ import java.util.List;
  */
 
 
+
 public interface UserMapper
 {
     /**
@@ -100,10 +101,10 @@ public interface UserMapper
      * mybatis中 如果含有多个参数列表  建议使用对象传值
      *
      * @param userName 用户名称
+     * @param  sex  性别
+     * @param  age  年龄
      * @return 用户信息列表
      */
-
-
     List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("username") String userName,@Param("age") String age);
 
 
