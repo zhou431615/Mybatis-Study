@@ -45,7 +45,7 @@ public interface UserMapper
      */
     List<UserVO> selectAll();
 
-    /**
+    /**  插入用户信息
      * Insert boolean.
      *
      * @param userPOJO the user pojo
@@ -53,7 +53,7 @@ public interface UserMapper
      */
     boolean insert(UserPOJO userPOJO);
 
-    /**
+    /**  更新用户信息
      * Update by id boolean.
      *
      * @param userPOJO the user pojo
@@ -61,12 +61,31 @@ public interface UserMapper
      */
     boolean updateById(UserPOJO userPOJO);
 
-    /**
+    /**  删除用户信息
      * Delete by id boolean.
      *
      * @param id the id
      * @return the boolean
      */
     boolean deleteById(Integer id);
+
+    /**
+     *  按照用户名称 模糊查询 包含某个字符串的用户信息
+     * @param userName 用户名称
+     * @return    用户信息列表
+     */
+
+    List<UserVO> selectUserListByNameLike(String userName);
+
+
+
+    /**  插入用户信息通过$方式
+     * Insert boolean.
+     *
+     * @param userPOJO the user pojo
+     * @return the boolean
+     */
+    boolean insertBy$ (UserPOJO userPOJO);
+
 
 }

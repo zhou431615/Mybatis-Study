@@ -9,6 +9,16 @@
         from user
         where id = #{id}
     </select>
+    <!--按照用户名称 模糊查询用户信息-->
+    <select id="selectUserListByNameLike" resultType="UserVO" parameterType="String">
+        select *
+        from user
+            /* # 防止sql注入写法*/
+        where username like "%"#{userName}"%"
+        /* $  字符串拼接写法
+        where  username like '%${value}%'
+           */
+    </select>
     <select id="selectAll" resultType="UserVO">
         select *
         from user
@@ -17,6 +27,11 @@
         insert into user(username, password, age, sex, user_hobby, remark)
         values (#{username}, #{password}, #{age}, #{sex}, #{userHobby}, #{remark})
     </insert>
+    <insert id="insertBy$" parameterType="UserPOJO">
+        insert into user(username, password, age, sex, user_hobby, remark)
+        values ('${username}', '${password}', '${age}', '${sex}', '${userHobby}', '${remark}')
+    </insert>
+
     <update id="updateById" parameterType="com.zhoujk.pojo.UserPOJO">
         update user
         set username=#{username},
@@ -31,6 +46,5 @@
         delete
         from user
         where id = #{id}
-
     </delete>
 </mapper>

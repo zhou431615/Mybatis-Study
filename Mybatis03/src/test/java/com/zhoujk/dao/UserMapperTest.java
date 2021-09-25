@@ -74,4 +74,24 @@ public class UserMapperTest
         boolean flag = userMapper.deleteById(10);
         System.out.println(flag);
     }
+
+    @Test
+    public void selectUserListByNameLike()
+    {
+        List<UserVO> userVOList = userMapper.selectUserListByNameLike("三");
+        System.out.println(userVOList.size());
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+    }
+
+    @Test
+    public void insertBy$()
+    {
+        System.out.println("通过%插入！");
+        UserPOJO userPOJO = new UserPOJO("李西娜", "123456", 23, "女", "演讲", "艺术家");
+        boolean flag = userMapper.insertBy$(userPOJO);
+        System.out.println(flag);
+    }
+
 }
