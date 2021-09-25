@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC
         "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zhoujk.dao.IUserDao">
+<mapper namespace="test">
     <!--id statementId值  resultType返回值类型:VO的全路径名称-->
     <select id="selectUserById" resultType="UserVO" parameterType="int">
         select *

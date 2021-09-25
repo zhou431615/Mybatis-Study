@@ -52,5 +52,6 @@
     <mappers>
         <!--<mapper resource="Mapper/UserMapper.xml"/>-->
         <mapper  class="com.zhoujk.dao.UserMapper"/>
+        <mapper resource="Mapper/sqlComm.xml"/>
     </mappers>
 </configuration>
