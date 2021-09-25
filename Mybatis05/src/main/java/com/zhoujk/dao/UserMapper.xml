@@ -133,9 +133,50 @@
                 and username=#{username}
             </if>
             <if test="age!=null">
-                and  userage=#{age}
+                and userage=#{age}
             </if>
         </where>
+    </select>
+
+    <!--根据用户输入更新用户信息-->
+    <update id="updateUser" parameterType="UserPOJO">
+        update user1
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username!=null  and username.trim()!=''">
+                username=#{username},
+            </if>
+            <if test="password!=null and password.trim()!=''">
+                userpassword=#{password},
+            </if>
+            <if test="age!=null">
+                userage=#{age},
+            </if>
+            <if test="sex!=null and  sex.trim()!=''">
+                usersex=#{sex},
+            </if>
+            <if test="userHobby!=null and userHobby.trim()!=''">
+                user_hobby=#{userHobby},
+            </if>
+            <if test="remark!=null  and  remark.trim()!=''">
+                user_remark=#{remark},
+            </if>
+        </trim>
+        where userid=#{id}
+    </update>
+
+    <select id="selectUserListBySexOrAge" resultMap="UserVO1ResultMap">
+        select *
+        from user1
+        where
+        <trim prefixOverrides="or">
+            <if test="sex!=null and sex.trim()!=''">
+                or usersex=#{sex}
+            </if>
+            <if test="age!=null">
+                or userage=#{age}
+            </if>
+        </trim>
+
     </select>
 
 

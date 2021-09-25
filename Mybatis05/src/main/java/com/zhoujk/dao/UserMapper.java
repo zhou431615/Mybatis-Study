@@ -85,7 +85,6 @@ public interface UserMapper
 
     List<UserVO> selectUserListByNameAndAge(@Param("username") String username, @Param("age") Integer age);
 
-
     /**
      *  询男性用户，如果输入了姓名则按照姓名模糊查找，
      *  否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
@@ -110,5 +109,14 @@ public interface UserMapper
 
     List<UserVO> selectUserListByNameAndAgeWhere2(@Param("username") String username, @Param("age") Integer age);
 
+    /**
+     *  根据用户的输入更新用户信息
+     * @param userPOJO 用户对象
+     * @return   是否更新成功
+     */
+    boolean updateUser(UserPOJO userPOJO);
+
+
+    List<UserVO> selectUserListBySexOrAge(@Param("sex") String sex, @Param("age") Integer age);
 
 }

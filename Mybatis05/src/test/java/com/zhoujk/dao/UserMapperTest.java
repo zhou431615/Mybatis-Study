@@ -100,4 +100,24 @@ public class UserMapperTest
         System.out.println("看看结果与selectUserListByNameAndAgeWhere1的有什么不同！");
     }
 
+    @Test
+    public void updateUser()
+    {
+        UserPOJO userPOJO = new UserPOJO();
+        userPOJO.setId(5);
+        userPOJO.setuserHobby("睡觉，吃饭，打豆豆");
+        boolean flag = userMapper.updateUser(userPOJO);
+        System.out.println(flag);
+    }
+
+    @Test
+    public void selectUserListBySexOrAge()
+    {
+        List<UserVO> userVOList = userMapper.selectUserListBySexOrAge(null, 24);
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+    }
+
+
 }
