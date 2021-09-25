@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sqlCommon">
     <sql id="sqlColumnComm">
-        id,username, password, age, sex, user_hobby, remark
+        userid,username,userpassword,userage, usersex, user_hobby,user_remark
     </sql>
 
 </mapper>

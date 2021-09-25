@@ -34,7 +34,7 @@
         <!--主键对应-->
         <id column="userid" property="id"/>
         <!--非主键对应-->
-        <result column="userusername" property="username"/>
+        <result column="username" property="username"/>
         <result column="userpassword" property="password"/>
         <result column="userage" property="age"/>
         <result column="usersex" property="sex"/>
@@ -43,13 +43,31 @@
     </resultMap>
 
 
+    <!--    <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="string">
+            select
+            <include refid="sqlCommon.sqlColumnComm"></include>
+            from user1
+            where usersex=#{param1} and
+            username like "%"#{param2}"%"
+        </select>-->
+    <select id="selectUserListBySexAndNameLike" resultMap="UserVO1ResultMap" parameterType="String">
+        select *
+        from user1
+        where usersex = #{sex}
+          and username like "%"#{userName}"%"
+    </select>
+
+
     <select id="selectUserListByNameLike" resultMap="UserVO1ResultMap" parameterType="string">
         select *
         from user1
         where username like "%"#{userName}"%"
     </select>
+
+
     <select id="selectAll" resultType="UserVO">
-        select <include refid="sqlCommon.sqlColumnComm"></include>
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
         from user
     </select>
     <insert id="insert" parameterType="UserPOJO">
