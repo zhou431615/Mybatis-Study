@@ -119,5 +119,27 @@ public class UserMapperTest
         }
     }
 
+    @Test
+    public void updateUserBySet()
+    {
+        UserPOJO userPOJO = new UserPOJO();
+        userPOJO.setId(1);
+        userPOJO.setUsername("蔡需昆");
+        userPOJO.setPassword("123456");
+        userPOJO.setuserHobby("唱，跳，rap,篮球");
+        userPOJO.setRemark("练习生");
+        boolean flag = userMapper.updateUserBySet(userPOJO);
+        System.out.println(flag);
+    }
+
+
+    @Test
+    public void selectUserListByIds()
+    {   Integer[] Ids  = {1,4,3,4,5,1,7};
+        List<UserVO> userVOList = userMapper.selectUserListByIds(Ids);
+        for (UserVO vo : userVOList) {
+            System.out.println(vo);
+        }
+    }
 
 }

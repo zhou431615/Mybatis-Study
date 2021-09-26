@@ -179,5 +179,42 @@
 
     </select>
 
+    <update id="updateUserBySet" parameterType="UserPOJO">
+        update user1
+        <set>
+            <if test="username!=null  and username.trim()!=''">
+                username=#{username},
+            </if>
+            <if test="password!=null and password.trim()!=''">
+                userpassword=#{password},
+            </if>
+            <if test="age!=null">
+                userage=#{age},
+            </if>
+            <if test="sex!=null and  sex.trim()!=''">
+                usersex=#{sex},
+            </if>
+            <if test="userHobby!=null and userHobby.trim()!=''">
+                user_hobby=#{userHobby},
+            </if>
+            <if test="remark!=null  and  remark.trim()!=''">
+                user_remark=#{remark},
+            </if>
+        </set>
+        where userid=#{id}
+    </update>
+
+
+    <!--select * from  table where column  in  (1,2,3,4,5)-->
+    <select id="selectUserListByIds" resultMap="UserVO1ResultMap" parameterType="Integer[]">
+        select
+        <include refid="sqlCommon.sqlColumnComm"></include>
+        from user1
+        where userid in
+        <foreach collection="Ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
 
 </mapper>

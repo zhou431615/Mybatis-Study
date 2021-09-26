@@ -117,6 +117,26 @@ public interface UserMapper
     boolean updateUser(UserPOJO userPOJO);
 
 
+    /**
+     * 根据性别或者年龄查询用户信息
+     * @param sex 性别
+     * @param age  年龄
+     * @return 用户列表信息
+     */
     List<UserVO> selectUserListBySexOrAge(@Param("sex") String sex, @Param("age") Integer age);
 
+    /**
+     *  根据用户修改的用户对象信息去更新用户，判断是否更新成功
+     * @param userPOJO  用户对象信息
+     * @return  是否更新成功
+     */
+    boolean updateUserBySet(UserPOJO userPOJO);
+
+
+    /**
+     *  根据ID数组查询用户信息列表
+     * @param Ids  多个用户的ID
+     * @return   用户信息列表
+     */
+    List<UserVO> selectUserListByIds(@Param("Ids") Integer[] Ids);
 }
