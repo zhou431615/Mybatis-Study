@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration核心配置文件-->
+<configuration>
+    <!--1.properties属性引入外部配置文件-->
+    <properties resource="db.properties"/>
+    <!--2.全局配置参数 -->
+    <settings>
+        <!--开启驼峰匹配-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--3.别名设置-->
+    <typeAliases>
+        <!--<typeAlias type="com.zhoujk.pojo.UserPOJO" alias="UserPOJO"/>-->
+        <!--<typeAlias type="com.zhoujk.vo.UserVO"  alias="UserVO"/>-->
+        <package name="com.zhoujk.pojo"/>
+        <package name="com.zhoujk.vo"/>
+    </typeAliases>
+    <!-- 设置一个默认的连接环境信息-->
+    <environments default="Mysql8.0_development">
+        <!-- 连接环境信息  取一个任意的唯一名字-->
+        <environment id="Mysql8.0_development">
+            <!-- mybatis使用jdbc事务管理方式 -->
+            <transactionManager type="JDBC"/>
+            <!--mybatis使用连接池的方式来获取连接-->
+            <dataSource type="POOLED">
+                <!--配置与数据库交互的4必要属性-->
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+
+        <!-- 再配置一个(可配置多个)连接环境信息  取一个任意的唯一名字-->
+        <environment id="Oracle_development">
+            <!-- mybatis使用jdbc事务管理方式 -->
+            <transactionManager type="JDBC"/>
+            <!--mybatis使用连接池的方式来获取连接-->
+            <dataSource type="POOLED">
+                <!--配置与数据库交互的4必要属性-->
+                <property name="driver" value="${oracle.driver}"/>
+                <property name="url" value="${oracle.url}"/>
+                <property name="username" value="${oracle.username}"/>
+                <property name="password" value="${oracle.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--每一个Mapper.xml都需要在Mybatis的核心配置文件中注册-->
+    <mappers>
+        <!--<mapper resource="Mapper/UserMapper.xml"/>-->
+        <mapper  class="com.zhoujk.dao.UserMapper"/>
+        <mapper resource="Mapper/sqlComm.xml"/>
+    </mappers>
+</configuration>
