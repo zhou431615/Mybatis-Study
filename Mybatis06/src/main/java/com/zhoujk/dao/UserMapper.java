@@ -75,37 +75,4 @@ public interface UserMapper
      */
     boolean deleteById(Integer id);
 
-    /**
-     * 按照用户名称 模糊查询 包含某个字符串的用户信息
-     *
-     * @param userName 用户名称
-     * @return 用户信息列表
-     */
-
-    List<UserVO> selectUserListByNameLike(String userName);
-
-
-    /**
-     * 插入用户信息通过$方式
-     * Insert boolean.
-     *
-     * @param userPOJO the user pojo
-     * @return the boolean
-     */
-    boolean insertBy$(UserPOJO userPOJO);
-
-
-    /**
-     * 查询男性会员  如果姓名不为空  则按照姓名进行模糊筛选
-     * 按照用户名称和性别 模糊查询 包含某个字符串的用户信息
-     * mybatis中 如果含有多个参数列表  建议使用对象传值
-     *
-     * @param userName 用户名称
-     * @param  sex  性别
-     * @param  age  年龄
-     * @return 用户信息列表
-     */
-    List<UserVO> selectUserListBySexAndNameLike(@Param("sex") String sex, @Param("username") String userName,@Param("age") String age);
-
-
 }

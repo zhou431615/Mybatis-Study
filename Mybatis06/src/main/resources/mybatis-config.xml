@@ -10,6 +10,8 @@
     <settings>
         <!--开启驼峰匹配-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+         <!--开启二级缓存 全局总开关  如果这里关闭，mapper中设置开启也没有用-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
     <!--3.别名设置-->
     <typeAliases>
