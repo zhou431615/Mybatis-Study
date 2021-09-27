@@ -13,6 +13,7 @@
         <module name="Mybatis05" />
         <module name="Mybatis06" />
         <module name="Mybatis07" />
+        <module name="Mybatis08" />
       </profile>
     </annotationProcessing>
   </component>
