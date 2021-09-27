@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujk.mapper.OrdersMapper">
+    <!--查询订单的用户信息 通过resultType-->
+
+    <select id="queryOrdersUserByOrderIdResultType" resultType="OrderUserVO">
+        select o.*,
+               u.id usersid,
+               u.username,
+               u.birthday,
+               u.sex,
+               u.address
+        from orders o,
+             user u
+        where o.user_id = u.id
+          and o.id = #{oid}
+    </select>
+    <!--查询订单的用户信息 通过resultMap-->
+    <resultMap id="OrderUserCustomerVOResultMap" type="OrderUserCustomerVO">
+        <!-- 配置映射的订单信息 -->
+        <!-- id：指定查询列中的唯一标识，订单信息的中的唯 一标识，如果有多个列组成唯一标识，配置多个id
+            column：订单信息的唯一标识列
+            property：订单信息的唯一标识列所映射到Orders中哪个属性
+          -->
+        <!--主键对应-->
+        <id column="id" property="id"></id>
+        <!--非主键对应-->
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+        <!--一对一的关系   user 对应的是类型中的对象名称-->
+        <!-- 配置映射的关联的用户信息 -->
+        <!-- association：用于映射关联查询单个对象的信息
+        property：要将关联查询的用户信息映射到Orders中哪个属性
+         -->
+        <association property="user" javaType="User">
+            <!-- id：关联查询用户的唯 一标识
+              column：指定唯 一标识用户信息的列
+              javaType：映射到user的哪个属性
+               -->
+            <!--主键对应-->
+            <id column="usersid" property="id"></id>
+            <!--非主键对应-->
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="sex" property="sex"></result>
+            <result column="address" property="address"></result>
+        </association>
+    </resultMap>
+    <select id="queryOrdersUserByOrderIdResultMap" resultMap="OrderUserCustomerVOResultMap">
+        select o.*,
+               u.id usersid,
+               u.username,
+               u.birthday,
+               u.sex,
+               u.address
+        from orders o,
+             user u
+        where o.user_id = u.id
+          and o.id = #{oid}
+    </select>
+
+    <!--根据订单 查询用户和订单详情-->
+    <resultMap id="OrderUserCustomerVOResultMap2" type="OrderUserCustomerVO">
+        <!--主键对应-->
+        <id column="id" property="id"></id>
+        <!--非主键对应-->
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+        <!--一对一的关系   user 对应的是类型中的对象名称-->
+        <association property="user" javaType="User">
+            <!--主键对应-->
+            <id column="usersid" property="id"></id>
+            <!--非主键对应-->
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="sex" property="sex"></result>
+            <result column="address" property="address"></result>
+        </association>
+        <!--多个详单-->
+        <!-- 订单明细信息
+              一个订单关联查询出了多条明细，要使用collection进行映射
+              collection：对关联查询到多条记录映射到集合对象中
+              property：将关联查询到多条记录映射到com.iot.mybatis.po.Orders哪个属性
+              ofType：指定映射到list集合属性中pojo的类型
+          -->
+        <collection property="orderDetailList" ofType="OrderDetail">
+            <!--主键对应-->
+            <id column="detail_id" property="id"></id>
+            <!--非主键对应-->
+            <result column="orders_id" property="ordersId"></result>
+            <result column="items_id" property="itemsId"></result>
+            <result column="items_num" property="itemsNum"></result>
+        </collection>
+    </resultMap>
+    <select id="queryOrdersUserAndDetailListByOrderIdResultMap" resultMap="OrderUserCustomerVOResultMap2">
+        select o.*,
+               u.id        usersid,
+               u.username,
+               u.birthday,
+               u.sex,
+               u.address,
+               d.id        detail_id,
+               d.orders_id orders_id,
+               d.items_id  items_id,
+               d.items_num items_num
+        from orders o,
+             user u,
+             orderdetail d
+        where o.user_id = u.id
+          and o.id = d.orders_id
+          and o.id = #{oid}
+    </select>
+
+    <!--根据订单 查询用户和订单详情   在订单详情中查找商品信息 -->
+    <resultMap id="OrderUserCustomerVOResultMap3" type="OrderUserCustomerVO">
+        <!--主键对应-->
+        <id column="id" property="id"></id>
+        <!--非主键对应-->
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+        <!--一对一的关系   user 对应的是类型中的对象名称-->
+        <association property="user" javaType="User">
+            <!--主键对应-->
+            <id column="usersid" property="id"></id>
+            <!--非主键对应-->
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="sex" property="sex"></result>
+            <result column="address" property="address"></result>
+        </association>
+        <!--多个详单-->
+        <collection property="orderDetailList" ofType="OrderDetail">
+            <!--主键对应-->
+            <id column="detail_id" property="id"></id>
+            <!--非主键对应-->
+            <result column="orders_id" property="ordersId"></result>
+            <result column="items_id" property="itemsId"></result>
+            <result column="items_num" property="itemsNum"></result>
+
+            <!--1对1     1个详单对应一个商品-->
+            <!--这里面的property 写的是父亲orderDetail里面的items这个类定义的名字  用这个名字找的对应关系      而不是指的是Items这个实体类   直接实体的话就没对应关系了，因为父亲里没有-->
+            <association property="items" javaType="Items">
+                <!--主键对应-->
+                <id column="goodsid" property="id"></id>
+                <!--非主键对应-->
+                <result column="goodsName" property="name"></result>
+                <result column="goodsPrice" property="price"></result>
+                <result column="goodsDetail" property="detail"></result>
+                <result column="goodsPic" property="pic"></result>
+                <result column="goodsCreatetime" property="createTime"></result>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="queryOrdersUserAndDetailListAndItemsByOrderIdResultMap" resultMap="OrderUserCustomerVOResultMap3">
+        select o.*,
+               u.id             usersid,
+               u.username,
+               u.birthday,
+               u.sex,
+               u.address,
+               d.id             detail_id,
+               d.orders_id      orders_id,
+               d.items_id       items_id,
+               d.items_num      items_num,
+               items.id         goodsid,
+               items.name       goodsName,
+               items.price      goodsPrice,
+               items.detail     goodsDetail,
+               items.pic        goodsPic,
+               items.createtime goodsCreatetime
+        from orders o,
+             user u,
+             orderdetail d,
+             items items
+        where o.user_id = u.id
+          and o.id = d.orders_id
+          and d.items_id = items.id
+          and o.id = #{oid}
+    </select>
+
+    <resultMap id="queryOrdersListByUserLazyLoadingResultMap" type="OrderUserCustomerVO">
+        <id column="id" property="id"></id>
+        <!--非主键对应-->
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createTime"></result>
+        <result column="note" property="note"></result>
+        <!--一对一的关系   user 对应的是类型中的对象名称-->
+        <!--延迟加载查找订单信息如果你需要进行查找程序调用select queryUserById调用的statementId查询结果
+        select *from user where id =orders.user_id
+
+        select后面的值如果再同一个namespace中那么直接写名字即可
+        如果不在同一namespace中那么需要把namespace的名字也写上
+        -->
+        <association property="user" javaType="User" select="com.zhoujk.mapper.UserMapper.queryUserById"
+                     column="user_id">
+        </association>
+        <!-- 实现对用户信息进行延迟加载 -->
+    </resultMap>
+
+    <select id="queryOrdersListByUserLazyLoading" resultMap="queryOrdersListByUserLazyLoadingResultMap">
+        select *
+        from orders
+    </select>
+
+
+</mapper>

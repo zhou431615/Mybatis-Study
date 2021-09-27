@@ -12,12 +12,16 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
          <!--开启二级缓存 全局总开关  如果这里关闭，mapper中设置开启也没有用-->
         <setting name="cacheEnabled" value="true"/>
+        <!-- 打开延迟加载 的开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为消极加载即按需要加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
     <!--3.别名设置-->
     <typeAliases>
         <!--<typeAlias type="com.zhoujk.pojo.User" alias="User"/>-->
         <!--<typeAlias type="com.zhoujk.vo.UserVO"  alias="UserVO"/>-->
-        <package name="com.zhoujk.pojo"/>
+        <package name="com.zhoujk.po"/>
         <package name="com.zhoujk.vo"/>
     </typeAliases>
     <!-- 设置一个默认的连接环境信息-->
@@ -54,6 +58,7 @@
     <mappers>
         <!--<mapper resource="Mapper/UserMapper.xml"/>-->
         <mapper  class="com.zhoujk.mapper.UserMapper"/>
+        <mapper  class="com.zhoujk.mapper.OrdersMapper"/>
         <mapper resource="Mapper/sqlComm.xml"/>
     </mappers>
 </configuration>

@@ -9,6 +9,8 @@ package com.zhoujk.mapper;
  */
 
 
+import com.zhoujk.vo.UserVO;
+
 /**
  * 使用代理接口
  * <p>
@@ -27,5 +29,13 @@ package com.zhoujk.mapper;
 
 public interface UserMapper
 {
+
+    /**
+     * 延迟加载的接口方法
+     * @param id
+     * @return
+     */
+    UserVO queryUserById (Integer id);
+
 
 }
