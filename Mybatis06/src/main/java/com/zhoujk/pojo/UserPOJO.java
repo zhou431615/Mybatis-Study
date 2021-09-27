@@ -1,5 +1,7 @@
 package com.zhoujk.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by IntelliJ IDEA
  *
@@ -7,8 +9,10 @@ package com.zhoujk.pojo;
  * @Date: 2021/9/23  8:25
  * @Description:
  */
-public class UserPOJO
+public class UserPOJO implements Serializable
 {
+    private static final long serialVersionUID = -6421600600035864155L;
+
     private Integer id;
     private String username;
     private String password;

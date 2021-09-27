@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujk.mapper.UserMapper">
+    <!--开启二级缓存-->
+    <!--<cache/>-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+</mapper>
