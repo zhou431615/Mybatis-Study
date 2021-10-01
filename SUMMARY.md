@@ -2,10 +2,10 @@
 
 * [概述](README.md)
 
-## 搭建Mybatis环境
+## 搭建Mybatis环境 <a id="set-up-mybatis-environmen"></a>
 
-* [下载Mybatis工程包](da-jian-mybatis-huan-jing/xia-zai-mybatis-gong-cheng-bao.md)
-* [搭建Mybatis项目环境](da-jian-mybatis-huan-jing/da-jian-mybatis-xiang-mu-huan-jing.md)
+* [下载Mybatis工程包](set-up-mybatis-environmen/xia-zai-mybatis-gong-cheng-bao.md)
+* [搭建Mybatis项目环境](set-up-mybatis-environmen/da-jian-mybatis-xiang-mu-huan-jing.md)
 
 ## mybatis-配置文件
 
