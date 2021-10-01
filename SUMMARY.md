@@ -29,3 +29,8 @@
 * [set、foreach](dong-tai-sql/set-foreach.md)
 * [Script、bind](dong-tai-sql/script-bind.md)
 
+## 缓存
+
+* [一级缓存](huan-cun/yi-ji-huan-cun.md)
+* [二级缓存](huan-cun/er-ji-huan-cun.md)
+
