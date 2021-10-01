@@ -98,6 +98,7 @@
         select
         <include refid="sqlCommon.sqlColumnComm"></include>
         from user1
+        <!-- 如果多出一个and,会自动清除。如果少个and或者多出多个and，会报错-->
         <where>
             <choose>
                 <when test="username!=null and username.trim()!=''">

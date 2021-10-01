@@ -86,7 +86,7 @@ public interface UserMapper
     List<UserVO> selectUserListByNameAndAge(@Param("username") String username, @Param("age") Integer age);
 
     /**
-     *  询男性用户，如果输入了姓名则按照姓名模糊查找，
+     *  询男性用户，如果输入了姓名则按照姓名精准查找，
      *  否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
      *  使用动态SQL的where
      *
@@ -98,8 +98,9 @@ public interface UserMapper
     List<UserVO> selectUserListByNameAndAgeWhere1(@Param("username") String username, @Param("age") Integer age);
 
    /**
-     *  询男性用户，如果输入了姓名则按照姓名模糊查找，
-     *  否则如果输入了年龄则按照年龄查找，否则查找姓名为"张三"的用户。
+     *  询男性用户，如果输入了姓名则按照姓名精准查找，
+     *  否则如果输入了年龄则按照年龄查找，如果两者都输入，两个条件都要成立
+    *   否则查找姓名为"张三"的用户。
      *  使用动态SQL的where
      *
      * @param username  用户名称

@@ -135,7 +135,8 @@ public class UserMapperTest
 
     @Test
     public void selectUserListByIds()
-    {   Integer[] Ids  = {1,4,3,4,5,1,7};
+    {
+        Integer[] Ids  = {1,4,3,4,5,1,7};
         List<UserVO> userVOList = userMapper.selectUserListByIds(Ids);
         for (UserVO vo : userVOList) {
             System.out.println(vo);
