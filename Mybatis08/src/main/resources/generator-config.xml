@@ -13,12 +13,12 @@
     <context id="default" targetRuntime="MyBatis3">
         <!--        默认文件创建人-->
         <property name="createBy" value="zhoujk"/>
-        <!--        lombok代替get/set方法-->
-        <!--        <plugin type="org.mybatis.generator.custom.plugins.LombokPlugin"/>-->
-        <!--        实现序列化接口-->
+        <!-- lombok代替get/set方法-->
+        <!-- <plugin type="org.mybatis.generator.custom.plugins.LombokPlugin"/>-->
+        <!-- 实现序列化接口-->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
-        <!--        生成service和serviceImpl-->
-        <!--        <plugin type="org.mybatis.generator.custom.plugins.ServicePlugin"/>-->
+        <!-- 生成service和serviceImpl-->
+        <!-- <plugin type="org.mybatis.generator.custom.plugins.ServicePlugin"/>-->
 
         <!-- optional，旨在创建class时，对注释进行控制 -->
         <commentGenerator>
@@ -57,13 +57,13 @@
         </javaModelGenerator>
 
         <!--生成mapper接口文件-->
-        <sqlMapGenerator targetPackage="com.zhoujk.dao"
+        <sqlMapGenerator targetPackage="com.zhoujk.mapper"
                          targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!--生成mapper.xml文件-->
-        <javaClientGenerator targetPackage="com.zhoujk.dao"
+        <javaClientGenerator targetPackage="com.zhoujk.mapper"
                              targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -74,7 +74,7 @@
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            &lt;!&ndash;区分大小写，与数据库保持一致&ndash;&gt;
+              区分大小写，与数据库保持一致
             <property name= "useActualColumnNames" value= "true"/>
         </table>
         -->

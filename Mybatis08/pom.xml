@@ -18,6 +18,7 @@
     <build>
         <plugins>
             <plugin>
+                <!--mybatis反向生成代码的插件配置-->
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
