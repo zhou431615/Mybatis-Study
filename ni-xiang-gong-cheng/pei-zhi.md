@@ -171,7 +171,7 @@ jdbc.minEvictableIdleTimeMillis = 3600000
 
 后面会详细介绍上面的参数内容。
 
-### 参考文章
+### 参考文章（特别感谢）
 
 [https://www.cnblogs.com/throwable/p/12046848.html](https://www.cnblogs.com/throwable/p/12046848.html)
 
