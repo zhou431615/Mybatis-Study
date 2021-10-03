@@ -41,3 +41,11 @@
 * [一对多关系](gao-ji-cha-xun/yi-dui-duo-guan-xi.md)
 * [多对多关系](gao-ji-cha-xun/duo-dui-duo-guan-xi.md)
 
+---
+
+* [延迟加载](yan-chi-jia-zai.md)
+
+## 逆向工程
+
+* [配置](ni-xiang-gong-cheng/pei-zhi.md)
+
