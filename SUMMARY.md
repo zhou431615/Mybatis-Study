@@ -37,4 +37,7 @@
 ## 高级查询
 
 * [表关系说明](gao-ji-cha-xun/biao-guan-xi-shuo-ming.md)
+* [一对一关系](gao-ji-cha-xun/yi-dui-yi-guan-xi.md)
+* [一对多关系](gao-ji-cha-xun/yi-dui-duo-guan-xi.md)
+* [多对多关系](gao-ji-cha-xun/duo-dui-duo-guan-xi.md)
 
