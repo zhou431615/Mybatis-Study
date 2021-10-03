@@ -1,5 +1,5 @@
 ---
-description: 简单介绍Mybatis
+description: '学习Mybatis的总结资料，多数内容为搬运，并非原创。如有侵权,请联系删改。欢迎斧正！'
 ---
 
 # 概述
@@ -22,7 +22,7 @@ MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache so
 
  并且 MyBatis 支持使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs\(Plain Old Java Objects,普通的 Java对象\)映射成数据库中的记录。
 
-## 感谢
+## 参考文章
 
 1. 老师的讲义
 2. [https://mybatis.org/mybatis-3/zh/configuration.html](https://mybatis.org/mybatis-3/zh/configuration.html)
